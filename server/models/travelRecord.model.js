@@ -1,4 +1,4 @@
-const mongoose = require('mongoose'); // Import mongoose for MongoDB interaction
+const mongoose = require('mongoose'); 
 const Schema = mongoose.Schema; // Schema constructor
 
 const TravelRecordSchema = new Schema ({
@@ -10,14 +10,14 @@ const TravelRecordSchema = new Schema ({
         type: String,
         required: true
     },
+    countryDetails:{
+        type: Object 
+    },
     weather: {
         type: Object, // Storing weather data as an object
     },
-    advisory:{
-        type: Object, // Storing travel advisory data as an object
-    },
-    countryDetails: {
-        type: Object, // Storing country details as an object
+    exchangeRates:{
+        type: Object, 
     },
     date: {
         type: Date,
