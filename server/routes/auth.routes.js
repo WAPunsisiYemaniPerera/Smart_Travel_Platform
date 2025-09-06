@@ -3,6 +3,7 @@ const router = express.Router();  // Router instance
 const bcrypt = require('bcryptjs'); // For hashing passwords
 const jwt = require('jsonwebtoken'); // For generating JWT tokens
 const User = require('../models/user.model'); // User model
+const authMiddleware = require('../middleware/authMiddleware'); // Authentication middleware
 
 router.post('/signup', async (req,res) =>{
     // getting user data from frontend
@@ -89,5 +90,17 @@ router.post('/login', async (req,res)=>{
         res.status(500).send('Server error');
     }
 })
+
+// when GET request is sent to /api/auth/user
+router.get('/user', authMiddleware, async (req,res)=>{
+    try {
+        // we can use req.user.id because authMiddleware adds user info to req object
+        const user = await User.findById(req.user.id).select('-password'); //exclude password
+        res.json(user); //send user data to frontend
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
 
 module.exports = router;
