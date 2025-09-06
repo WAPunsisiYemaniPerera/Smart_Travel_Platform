@@ -20,6 +20,9 @@ app.get('/', (req,res)=>{
 //connecting auth routes
 app.use('/api/auth', require('./routes/auth.routes'));
 
+//connecting travel records routes
+app.use('/api/records', require('./routes/records.routes'));
+
 //start the server
 app.listen(PORT, ()=>{
     console.log(`My Smart Travel Server is running on port: ${PORT}`);
