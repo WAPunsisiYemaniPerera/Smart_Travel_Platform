@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/profile.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>My Profile</h1>
+        <div>
+            <a href="travel.html" class="nav-link">Search</a>
+            <a href="history.html" class="nav-link">History</a>
+            <a href="compare.html" class="nav-link">Compare</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </div>
+    </header>
+    <main>
+        <div id="profile-info" class="profile-section">
+            <h2>User Information</h2>
+            <p><strong>Username:</strong> <span id="profile-username">Loading...</span></p>
+            <p><strong>Email:</strong> <span id="profile-email">Loading...</span></p>
+        </div>
+
+        <div class="profile-section">
+            <h2>Change Password</h2>
+            <form id="change-password-form">
+                <input type="password" id="current-password" placeholder="Current Password" required>
+                <input type="password" id="new-password" placeholder="New Password" required minlength="6">
+                <button type="submit">Change Password</button>
+            </form>
+        </div>
+
+        <div class="profile-section">
+            <h2>Delete Account</h2>
+            <p>This action cannot be undone. All your saved records will be permanently deleted.</p>
+            <button id="delete-account-btn" class="danger-btn">Delete My Account</button>
+        </div>
+    </main>
+</body>
+</html>

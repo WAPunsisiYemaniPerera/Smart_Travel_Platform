@@ -120,4 +120,50 @@ router.get('/google/callback', passport.authenticate('google', { session: false,
     res.redirect(`http://localhost:5500/client/travel.html?token=${token}`);
 });
 
+//password changing route
+router.post('/change-password', authMiddleware, async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    
+    try {
+        // find user from the database
+        const user = await User.findById(req.user.id);
+
+        // check whether the existing password is correct
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ msg: 'Incorrect current password' });
+        }
+
+        // update the password after hashing
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(newPassword, salt);
+        await user.save();
+
+        res.json({ msg: 'Password changed successfully' });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// Route for deleting account
+const TravelRecord = require('../models/travelRecord.model'); 
+
+router.delete('/delete-account', authMiddleware, async (req, res) => {
+    try {
+        // deleting the all records of the user
+        await TravelRecord.deleteMany({ user: req.user.id });
+        
+        // Deleting user account
+        await User.findByIdAndDelete(req.user.id);
+
+        res.json({ msg: 'Account deleted successfully' });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;
