@@ -1,6 +1,3 @@
-// js/compare.js
-
-// travel.js එකේ තිබූ API Keys ටිකම මෙතනටත් දාන්න
 const WEATHER_API_KEY = 'b76125182e0f92bb87dfab5c48e8f585';
 const EXCHANGE_RATE_API_KEY = 'dca4dc5d69bba11c25957aa8';
 
@@ -8,8 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // The token is needed to check if you are logged in, since this page doesn't require you to log in,
     // Let's make this public, without logging out if we don't have the token.
     // You can also put the login check here if you want.
-
-
     const compareForm = document.getElementById('compare-form');
     const country1Input = document.getElementById('country1-input');
     const country2Input = document.getElementById('country2-input');
@@ -72,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 temperature: weatherData.main.temp,
                 condition: weatherData.weather[0].description
             },
-            exchangeRate: exchangeData.conversion_rates[currencyCode] // USD එකකට අදාළ අගය
+            exchangeRate: exchangeData.conversion_rates[currencyCode] // the value for 1 USD
         };
     }
 
