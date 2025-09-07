@@ -7,28 +7,21 @@ const TravelRecord = require('../models/travelRecord.model'); // Import TravelRe
 //save a new travel record
 router.post('/', [apiKeyMiddleware, authMiddleware], async (req, res) => {
     try {
-        //get the details from the frontend
-        const {
-            country,
-            weather,
-            advisory,
-            countryDetails
-        } = req.body;
+        // The exchangeRates section is now also retrieved from req.body.
+        const { country, weather, countryDetails, exchangeRates } = req.body;
 
-        //create a new travel record
+        // When creating a new record, the exchangeRates section is also added.
         const newRecord = new TravelRecord({
             country,
             weather,
-            advisory,
             countryDetails,
-            user: req.user.id //get user id from auth middleware
+            exchangeRates, 
+            user: req.user.id
         });
 
-        //save the record to database
         const record = await newRecord.save();
-
-        //send the saved record as response
         res.status(201).json(record);
+
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
@@ -48,7 +41,30 @@ router.get('/', [apiKeyMiddleware, authMiddleware], async (req,res)=>{
         console.error(err.message);
         res.status(500).send('Server Error')
     }
-})
+});
+
+router.delete('/:id', [apiKeyMiddleware, authMiddleware], async (req, res) => {
+    try {
+        let record = await TravelRecord.findById(req.params.id);
+
+        if (!record) {
+            return res.status(404).json({ msg: 'Record not found' });
+        }
+
+        // Checking if this report is the relevant user (very important!)
+        if (record.user.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        await TravelRecord.findByIdAndDelete(req.params.id);
+
+        res.json({ msg: 'Record removed successfully' });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 
 module.exports = router;
