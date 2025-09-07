@@ -2,30 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Compare Countries</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Compare Countries - Smart Travel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/compare.js" defer></script>
+    <style>
+        /* සරල animation එකක් */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>Compare Travel Information</h1>
-        <div>
-            <a href="travel.html" class="nav-link">Search</a>
-            <a href="history.html" class="nav-link">History</a>
-            <a href="compare.html" class="nav-link">Compare</a>
-        </div>
-    </header>
-    <main>
-        <form id="compare-form">
-            <div class="input-group">
-                <input type="text" id="country1-input" placeholder="Enter first country..." required>
-                <input type="text" id="country2-input" placeholder="Enter second country..." required>
+<body class="bg-gray-50 font-sans">
+
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="travel.html" class="flex items-center gap-2">
+                <svg class="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                <span class="text-xl font-bold text-gray-800">Smart Travel</span>
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="travel.html" class="text-gray-600 hover:text-sky-600 transition-colors">Search</a>
+                <a href="history.html" class="text-gray-600 hover:text-sky-600 transition-colors">History</a>
+                <a href="compare.html" class="text-gray-600 font-semibold hover:text-sky-600 transition-colors">Compare</a>
+                 <a href="profile.html" class="text-gray-600 hover:text-sky-600 transition-colors">Profile</a>
             </div>
-            <button type="submit">Compare</button>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-8">Compare Travel Information</h1>
+        
+        <form id="compare-form" class="max-w-3xl mx-auto flex flex-col md:flex-row gap-4 mb-8 shadow-lg p-6 bg-white rounded-lg animate-fade-in-up">
+            <div class="flex-grow flex flex-col md:flex-row gap-4">
+                <input type="text" id="country1-input" placeholder="Enter first country..." required 
+                       class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 text-lg" />
+                <input type="text" id="country2-input" placeholder="Enter second country..." required 
+                       class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 text-lg" />
+            </div>
+            <button type="submit" 
+                    class="bg-sky-600 text-white px-6 py-3 rounded-md hover:bg-sky-700 transition-colors font-semibold flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                <span>Compare</span>
+            </button>
         </form>
 
-        <div id="comparison-container">
-            </div>
+        <div id="comparison-container" class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <p class="text-center md:col-span-2 text-gray-500">Enter two countries above to see a comparison.</p>
+        </div>
     </main>
 </body>
 </html>

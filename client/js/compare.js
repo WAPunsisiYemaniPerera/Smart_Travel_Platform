@@ -74,26 +74,81 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function that displays two columns of data
     function displayComparison(data1, data2) {
         comparisonContainer.innerHTML = `
-            <div class="comparison-grid">
-                <div class="country-column">
-                    <h2>${data1.country} <img src="${data1.details.flag}" width="50"></h2>
-                    <ul>
-                        <li><strong>Population:</strong> ${data1.details.population.toLocaleString()}</li>
-                        <li><strong>Capital:</strong> ${data1.details.capital}</li>
-                        <li><strong>Weather:</strong> ${data1.weather.temperature}°C, ${data1.weather.condition}</li>
-                        <li><strong>Currency:</strong> ${data1.details.currencyName} (${data1.details.currencySymbol})</li>
-                        <li><strong>Exchange Rate:</strong> 1 USD = ${data1.exchangeRate.toFixed(2)} ${data1.details.currencySymbol}</li>
-                    </ul>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 animate-fade-in-up">
+                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-200">
+                    <img src="${data1.details.flag}" alt="flag" class="w-12 h-auto rounded-md shadow-sm">
+                    <h2 class="text-2xl font-bold text-gray-800">${data1.country}</h2>
                 </div>
-                <div class="country-column">
-                    <h2>${data2.country} <img src="${data2.details.flag}" width="50"></h2>
-                    <ul>
-                        <li><strong>Population:</strong> ${data2.details.population.toLocaleString()}</li>
-                        <li><strong>Capital:</strong> ${data2.details.capital}</li>
-                        <li><strong>Weather:</strong> ${data2.weather.condition}, ${data2.weather.temperature}°C</li>
-                        <li><strong>Currency:</strong> ${data2.details.currencyName} (${data2.details.currencySymbol})</li>
-                        <li><strong>Exchange Rate:</strong> 1 USD = ${data2.exchangeRate.toFixed(2)} ${data2.details.currencySymbol}</li>
-                    </ul>
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6H8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path></svg>
+                            Country Details
+                        </h3>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex justify-between"><span>Capital:</span> <span class="font-medium text-gray-800">${data1.details.capital}</span></li>
+                            <li class="flex justify-between"><span>Population:</span> <span class="font-medium text-gray-800">${data1.details.population.toLocaleString()}</span></li>
+                            <li class="flex justify-between"><span>Currency:</span> <span class="font-medium text-gray-800">${data1.details.currencyName} (${data1.details.currencySymbol})</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            Current Weather
+                        </h3>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex justify-between"><span>Temperature:</span> <span class="font-medium text-gray-800">${data1.weather.temperature}°C</span></li>
+                            <li class="flex justify-between"><span>Condition:</span> <span class="font-medium text-gray-800 capitalize">${data1.weather.condition}</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 16v-1m0-1c-1.11 0-2.08-.402-2.599-1M12 16c-1.657 0-3-.895-3-2s1.343-2 3-2m0 8v1m0-1c1.11 0 2.08.402 2.599 1M12 4v1m0 16v-1m0-1c1.11 0 2.08.402 2.599 1M12 4c-1.657 0-3 .895-3 2s1.343 2 3 2m0-8V3"></path></svg>
+                            Exchange Rate
+                        </h3>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex justify-between"><span>1 USD to ${data1.details.currencySymbol}:</span> <span class="font-medium text-gray-800">${data1.exchangeRate.toFixed(2)}</span></li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 animate-fade-in-up">
+                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-200">
+                    <img src="${data2.details.flag}" alt="flag" class="w-12 h-auto rounded-md shadow-sm">
+                    <h2 class="text-2xl font-bold text-gray-800">${data2.country}</h2>
+                </div>
+                <div class="space-y-4">
+                     <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                             <svg class="w-5 h-5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6H8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path></svg>
+                            Country Details
+                        </h3>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex justify-between"><span>Capital:</span> <span class="font-medium text-gray-800">${data2.details.capital}</span></li>
+                            <li class="flex justify-between"><span>Population:</span> <span class="font-medium text-gray-800">${data2.details.population.toLocaleString()}</span></li>
+                            <li class="flex justify-between"><span>Currency:</span> <span class="font-medium text-gray-800">${data2.details.currencyName} (${data2.details.currencySymbol})</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                             <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            Current Weather
+                        </h3>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex justify-between"><span>Temperature:</span> <span class="font-medium text-gray-800">${data2.weather.temperature}°C</span></li>
+                            <li class="flex justify-between"><span>Condition:</span> <span class="font-medium text-gray-800 capitalize">${data2.weather.condition}</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                             <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 16v-1m0-1c-1.11 0-2.08-.402-2.599-1M12 16c-1.657 0-3-.895-3-2s1.343-2 3-2m0 8v1m0-1c1.11 0 2.08.402 2.599 1M12 4v1m0 16v-1m0-1c1.11 0 2.08.402 2.599 1M12 4c-1.657 0-3 .895-3 2s1.343 2 3 2m0-8V3"></path></svg>
+                            Exchange Rate
+                        </h3>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex justify-between"><span>1 USD to ${data2.details.currencySymbol}:</span> <span class="font-medium text-gray-800">${data2.exchangeRate.toFixed(2)}</span></li>
+                            </ul>
+                    </div>
                 </div>
             </div>
         `;
