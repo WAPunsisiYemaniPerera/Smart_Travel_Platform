@@ -5,9 +5,15 @@ const connectDB = require('./config/db'); //database connection
 
 dotenv.config(); //load environment variables
 
+const passport = require('passport'); //import newly
+
 connectDB(); //connect to database
 
+require('./config/passport-setup'); //run passport-setup.js
+
 const app = express();
+
+app.use(passport.initialize()); //// passport initialize
 
 app.use(cors());
 

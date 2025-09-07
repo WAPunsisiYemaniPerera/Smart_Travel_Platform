@@ -2,6 +2,7 @@ const express = require('express'); // Express framework
 const router = express.Router();  // Router instance
 const bcrypt = require('bcryptjs'); // For hashing passwords
 const jwt = require('jsonwebtoken'); // For generating JWT tokens
+const passport = require('passport');
 const User = require('../models/user.model'); // User model
 const authMiddleware = require('../middleware/authMiddleware'); // Authentication middleware
 
@@ -101,6 +102,22 @@ router.get('/user', authMiddleware, async (req,res)=>{
         console.error(err.message);
         res.status(500).send('Server error');
     }
+});
+
+// The route that initiates the Google Login process
+// GET /api/auth/google
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+// The callback route coming back from Google
+// GET /api/auth/google/callback
+router.get('/google/callback', passport.authenticate('google', { session: false, failureRedirect: '/login' }), (req, res) => {
+    // If the Google login is successful, the user's details are in req.user.
+    // Now we will create our own JWT token for that user.
+    const payload = { user: { id: req.user.id } };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Redirect the user to the travel.html page on the frontend and provide the token in the URL.
+    res.redirect(`http://localhost:5500/client/travel.html?token=${token}`);
 });
 
 module.exports = router;

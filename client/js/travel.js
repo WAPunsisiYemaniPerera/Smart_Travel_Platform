@@ -4,6 +4,19 @@ const APP_API_KEY = 'HELLO_HELLO_WORLD_2025';
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Checks if the URL contains a token.
+    const params = new URLSearchParams(window.location.search);
+    const tokenFromUrl = params.get('token');
+
+    if (tokenFromUrl) {
+        // If a token exists, it is saved in local storage.
+        localStorage.setItem('token', tokenFromUrl);
+        // Clean up the URL (so that the token is not visible)
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+
+
     // 2. Check if user is logged in (token exists)
     const token = localStorage.getItem('token');
     if (!token) {
