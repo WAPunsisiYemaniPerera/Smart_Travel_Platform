@@ -210,5 +210,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    fetchUserLocationAndData();
+    //fetchUserLocationAndData();
 });
