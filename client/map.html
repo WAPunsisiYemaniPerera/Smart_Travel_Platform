@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Map - Smart Travel</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        .leaflet-container {
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen font-sans">
+
+    <header class="bg-white shadow-md flex-shrink-0">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="travel.html" class="flex items-center gap-2">
+                <svg class="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                <span class="text-xl font-bold text-gray-800">Smart Travel</span>
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="travel.html" class="text-gray-600 hover:text-sky-600 transition-colors">Search</a>
+                <a href="history.html" class="text-gray-600 hover:text-sky-600 transition-colors">History</a>
+                <a href="compare.html" class="text-gray-600 hover:text-sky-600 transition-colors">Compare</a>
+                <a href="map.html" class="text-gray-600 font-semibold hover:text-sky-600 transition-colors">Map</a>
+                <a href="profile.html" class="text-gray-600 hover:text-sky-600 transition-colors">Profile</a>
+                <button id="logout-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors text-sm font-semibold">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow relative">
+        <div id="map" class="absolute inset-0"></div>
+
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 z-10 w-full max-w-lg">
+            <form id="map-search-form" class="flex shadow-2xl rounded-lg">
+                <input type="text" id="map-country-input" placeholder="Search for a country..." required
+                       class="w-full p-4 border-none rounded-l-lg focus:outline-none focus:ring-2 focus:ring-sky-500 text-lg"/>
+                <button type="submit" class="bg-sky-600 text-white px-6 rounded-r-lg hover:bg-sky-700 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     
+    <script src="js/map.js"></script>
+</body>
+</html>
