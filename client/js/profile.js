@@ -1,11 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
-    const APP_API_KEY = 'HELLO_HELLO_WORLD_2025'
+    const APP_API_KEY = 'HELLO_HELLO_WORLD_2025';
 
+    // 1. Check if user is logged in
     if (!token) {
         window.location.href = 'login.html';
         return;
     }
+
+    const logoutBtn = document.getElementById('logout-btn');
+    if(logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('token'); 
+            alert('You have been logged out.');
+            window.location.href = 'login.html'; 
+        });
+    }
+    
 
     const usernameSpan = document.getElementById('profile-username');
     const emailSpan = document.getElementById('profile-email');
